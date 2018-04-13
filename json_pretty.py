@@ -191,7 +191,9 @@ class Jid:
 
     def __str__(self):
         if self.type=='string':
-            ret=self.id.replace('"',r'\"')
+            ret = self.id.replace('"',r'\"')
+            if ret.find('\\u') != -1:
+                ret = ret.encode('utf-8').decode('raw_unicode-escape')
             return "\""+ret+"\""
         return str(self.id)
 
